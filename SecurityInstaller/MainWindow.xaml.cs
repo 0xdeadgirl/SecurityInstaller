@@ -49,7 +49,7 @@ namespace SecurityInstaller
             bios.Text = await Task<string>.Run(() => $"{ComputerInfo.BiosInfo[0]}\n{ComputerInfo.BoardInfo[1]}\nVer: {ComputerInfo.BiosInfo[2]}");
             storage.Text = await Task<string>.Run(() => $"Partitions:\n{ComputerInfo.Partitions}\nLocal / Physical Drives:\n{ComputerInfo.Drives}");
             gpu.Text = await Task<string>.Run(() => $"{ComputerInfo.GPU}");
-            memory.Text = await Task<string>.Run(() => $"{ComputerInfo.MaxMemory}GB");
+            memory.Text = await Task<string>.Run(() => $"{ComputerInfo.MaxMemory}");
             cpu.Text = await Task<string>.Run(() => $"{ComputerInfo.CPU}");
             mac.Text = await Task<string>.Run(() => $"{ComputerInfo.Mac}");
         }

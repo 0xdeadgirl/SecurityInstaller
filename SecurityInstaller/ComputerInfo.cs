@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Management;
 
-public static class ComputerInfo
-{
+public static class ComputerInfo {
     // Drive Partitions
     private static string GetDriveInfo() {
         string dInfo = string.Empty;
@@ -12,8 +12,8 @@ public static class ComputerInfo
             DriveInfo[] allDrives = DriveInfo.GetDrives();
 
             foreach (DriveInfo drive in allDrives) {
-                double freeSpace = drive.TotalFreeSpace / 1073741824;
-                double totalSpace = drive.TotalSize / 1073741824;
+                string freeSpace = Bytes.Format(drive.TotalFreeSpace);
+                string totalSpace = Bytes.Format(drive.TotalSize);
                 string format = drive.DriveFormat;
                 string name = drive.Name;
 
@@ -31,11 +31,9 @@ public static class ComputerInfo
         try {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive")) {
                 foreach (ManagementObject wmi in searcher.Get()) {
-                    object size = wmi["Size"];
-                    object tSize = Convert.ToInt64(size) / 1073741824;
+                    string size = Bytes.Format(Convert.ToInt64(wmi["Size"]));
 
-                    dInfo += $"{(string)wmi["Model"]} {tSize}GB\n";
-
+                    dInfo += $"{(string)wmi["Model"]} {size}\n";
                     wmi.Dispose();
                 }
             }
@@ -164,8 +162,8 @@ public static class ComputerInfo
 
                         obj.Dispose();
                     }
-                    memorySize /= 1073741824;
-                    memSizestring = memorySize.ToString();
+
+                    memSizestring = Bytes.Format(memorySize);
                 }
             }
         } catch (Exception ex) { return ex.Message; }
@@ -341,7 +339,7 @@ public static class ComputerInfo
 --------------------------------------------------------
     
 {"\tSticks: " + RamSlots}
-{"\tTotal: " + MaxMemory}GB
+{"\tTotal: " + MaxMemory}
 
             
 --------------------------------------------------------
