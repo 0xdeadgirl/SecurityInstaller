@@ -13,28 +13,22 @@ namespace SecurityInstaller
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+    public partial class MainWindow : Window {
+        public MainWindow() {
             InitializeComponent();
 
-            try
-            {
+            try {
                 // Call Windows 11 API to Round Corners
                 IntPtr hWnd = new WindowInteropHelper(GetWindow(this)).EnsureHandle();
                 var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
                 var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
                 DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
-            }
-            catch
-            {
+            } catch {
             }
         }
 
         // When window is loaded
-        private async void OnLoad(object sender, RoutedEventArgs e)
-        {
+        private async void OnLoad(object sender, RoutedEventArgs e) {
             // Start Global Timer with event
             var timer = new DispatcherTimer();
             // Change frame tick
@@ -47,8 +41,7 @@ namespace SecurityInstaller
             DisplayHardwareInfo();
         }
 
-        private async void DisplayHardwareInfo()
-        {
+        private async void DisplayHardwareInfo() {
             name.Text = await Task<string>.Run(() => $"Device: {Environment.MachineName}\nUser: {Environment.UserName}");
             serialNum.Text = await Task<string>.Run(() => $"{ComputerInfo.BiosInfo[1]}");
             makeModel.Text = await Task<string>.Run(() => $"{ComputerInfo.BoardInfo[0]}\n{ComputerInfo.ProductName}");
@@ -72,8 +65,7 @@ namespace SecurityInstaller
         /// <summary>
         /// Main Funtion on Button Click
         /// </summary>
-        private async void StartBtn_Click(object sender, EventArgs e)
-        {
+        private async void StartBtn_Click(object sender, EventArgs e) {
             StartBtn.IsEnabled = false;
 
             // Reset
@@ -93,14 +85,12 @@ namespace SecurityInstaller
             progressModel.ProgressChanged += ReportProgress;
 
             // Progress reporter for task completion / error messages
-            resultsProgress = new Progress<string>(str =>
-            {
+            resultsProgress = new Progress<string>(str => {
                 ScriptOutput.Text += $"\n{str}";
             });
 
             // Progress reporter for how many tasks have completed
-            progressBarProgress = new Progress<int>(value =>
-            {
+            progressBarProgress = new Progress<int>(value => {
                 ProgressBar2.Value += value;
                 report.DownloadCompleted++;
                 progress.Report(report);
@@ -117,16 +107,12 @@ namespace SecurityInstaller
             await Task.WhenAll(tasks);
 
             // If folder is checked make folder
-            if (noc.IsChecked == true)
-            {
-                try
-                {
+            if (noc.IsChecked == true) {
+                try {
                     await Tools.MakeNOC(resources.Malwarebytes, resources.CCleaner, resources.Glary);
                     ScriptOutput.AppendText("\n\nNOC Folder Created");
                     ProgressBar2.Value += 1;
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     ScriptOutput.AppendText($"\n\nError making NOC Folder. Reason:\n{ex.Message}");
                 }
             }
@@ -134,39 +120,30 @@ namespace SecurityInstaller
             // Cleanup
             // Delete MB shortcut from installer
             if (File.Exists(@"C:\Users\Public\Desktop\Malwarebytes.lnk"))
-            {
                 File.Delete(@"C:\Users\Public\Desktop\Malwarebytes.lnk");
-            }
 
             // Delete CC shortcut from installer
             if (File.Exists(@"C:\Users\Public\Desktop\CCleaner.lnk"))
-            {
                 File.Delete(@"C:\Users\Public\Desktop\CCleaner.lnk");
-            }
 
             // Delete GU shortcut from installer
             if (File.Exists(@"C:\Users\Public\Desktop\Glary Utilities.lnk"))
-            {
                 File.Delete(@"C:\Users\Public\Desktop\Glary Utilities.lnk");
-            }
 
             StartBtn.IsEnabled = true;
-
             ScriptOutput.AppendText("\n\nDone!");
         }
 
         // Add tasks to a list
-        private void AddTasks()
-        {
-            if (remote.IsChecked == true) { AddProgressTask(resources.Support); }
-            if (adw.IsChecked == true) { AddProgressTask(resources.Adw); }
-            if (mb.IsChecked == true) { AddProgressTask(resources.Malwarebytes); }
-            if (gu.IsChecked == true) { AddProgressTask(resources.Glary); }
-            if (cc.IsChecked == true) { AddProgressTask(resources.CCleaner); }
+        private void AddTasks() {
+            if (remote.IsChecked == true) AddProgressTask(resources.Support);
+            if (adw.IsChecked == true) AddProgressTask(resources.Adw);
+            if (mb.IsChecked == true) AddProgressTask(resources.Malwarebytes);
+            if (gu.IsChecked == true) AddProgressTask(resources.Glary);
+            if (cc.IsChecked == true) AddProgressTask(resources.CCleaner);
 
             // if checked
-            if (sfc.IsChecked == true)
-            {
+            if (sfc.IsChecked == true) {
                 // add task
                 tasks.Add(Task.Run(() => Tools.FileChecker()));
 
@@ -177,23 +154,20 @@ namespace SecurityInstaller
                 ProgressBar2.Value += 1;
             }
 
-            if (uBlock.IsChecked == true)
-            {
+            if (uBlock.IsChecked == true) {
                 tasks.Add(Tools.InstallUB());
                 resultsProgress.Report("\nUBlock Origin added to Edge and Chrome");
                 ProgressBar2.Value += 1;
             }
 
-            if (tpApps.IsChecked == true)
-            {
+            if (tpApps.IsChecked == true) {
                 tasks.Add(Task.Run(() => Tools.ThirdPartyUpdater()));
                 resultsProgress.Report("\nThird Party Apps Updating");
                 ProgressBar2.Value += 1;
             }
         }
 
-        private void AddProgressTask(Tool tool)
-        {
+        private void AddProgressTask(Tool tool) {
             // Check if we are downloading / installing / running our tasks
             bool downloadBool = (bool)download.IsChecked;
             bool installBool = (bool)install.IsChecked;
@@ -203,8 +177,7 @@ namespace SecurityInstaller
             report.DownloadPercentagesList.Add(tool);
 
             // create progress reporter to update specific value
-            IProgress<int> progressVal = new Progress<int>(value =>
-            {
+            IProgress<int> progressVal = new Progress<int>(value => {
                 // Update our tool refrence
                 tool.PercentageComplete = value;
 
@@ -213,7 +186,13 @@ namespace SecurityInstaller
             });
 
             // add task with reporters
-            tasks.Add(Downloader.StartDownload(tool, progressVal, progressBarProgress, resultsProgress, downloadBool, installBool, runBool));
+            tasks.Add(Downloader.StartDownload(
+                tool,
+                progressVal,
+                progressBarProgress,
+                resultsProgress,
+                downloadBool, installBool, runBool
+            ));
         }
 
         /// <summary>
@@ -221,44 +200,34 @@ namespace SecurityInstaller
         /// </summary>
 
         // make top bar able to drag window
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.LeftButton == MouseButtonState.Pressed) {
                 DragMove();
             }
         }
 
         // close window
-        private void ExitBtn_Click(object sender, EventArgs e)
-        {
+        private void ExitBtn_Click(object sender, EventArgs e) {
             Close();
         }
 
         // minimize window
-        private void Minimize_Click(object sender, EventArgs e)
-        {
+        private void Minimize_Click(object sender, EventArgs e) {
             WindowState = WindowState.Minimized;
         }
 
         // copy asset info to clipboard
-        private void CopyBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void CopyBtn_Click(object sender, EventArgs e) {
+            try {
                 System.Windows.Clipboard.SetText(ComputerInfo.asset);
-            }
-            catch
-            {
+            } catch {
                 ProgressText.Text = "Stop Pressing the Copy Button!";
             }
         }
 
         // if checked enable child checkboxes else disable children
-        private void CBSwitch_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbSwitch.IsChecked == false)
-            {
+        private void CBSwitch_Click(object sender, RoutedEventArgs e) {
+            if (cbSwitch.IsChecked == false) {
                 adw.IsEnabled = false;
                 adw.IsChecked = false;
                 adw.Opacity = .1;
@@ -274,9 +243,7 @@ namespace SecurityInstaller
                 cc.IsEnabled = false;
                 cc.IsChecked = false;
                 cc.Opacity = .1;
-            }
-            else if (cbSwitch.IsChecked == true)
-            {
+            } else if (cbSwitch.IsChecked == true) {
                 adw.IsEnabled = true;
                 adw.Opacity = 1;
 
@@ -296,16 +263,13 @@ namespace SecurityInstaller
         /// </summary>
 
         // on tick specified in "OnLoad" func
-        private void timer_Tick(object sender, EventArgs e)
-        {
+        private void timer_Tick(object sender, EventArgs e) {
 
         }
 
         // on event call update top progress bar
-        private void ReportProgress(object sender, ProgressReportModel e)
-        {
-            if (ProgressBar1.Value < e.TotalPercentageCompleted())
-            {
+        private void ReportProgress(object sender, ProgressReportModel e) {
+            if (ProgressBar1.Value < e.TotalPercentageCompleted()) {
                 ProgressBar1.Value = e.TotalPercentageCompleted();
             }
             ProgressText.Text = $"{e.DownloadCompleted}/{e.DownloadCount} items - Download {e.TotalPercentageCompleted()}% complete";

@@ -2,20 +2,17 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-public partial class RoundCorners : Window
-{
+public partial class RoundCorners : Window {
     // The enum flag for DwmSetWindowAttribute's second parameter, which tells the function what attribute to set.
     // Copied from dwmapi.h
-    public enum DWMWINDOWATTRIBUTE
-    {
+    public enum DWMWINDOWATTRIBUTE {
         DWMWA_WINDOW_CORNER_PREFERENCE = 33
     }
 
     // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
     // what value of the enum to set.
     // Copied from dwmapi.h
-    public enum DWM_WINDOW_CORNER_PREFERENCE
-    {
+    public enum DWM_WINDOW_CORNER_PREFERENCE {
         DWMWCP_DEFAULT = 0,
         DWMWCP_DONOTROUND = 1,
         DWMWCP_ROUND = 2,

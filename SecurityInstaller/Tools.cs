@@ -6,13 +6,12 @@ using Microsoft.Win32;
 using System;
 using IWshRuntimeLibrary;
 using System.Windows.Resources;
-using static ToolResource;
+// using static ToolResource;
 
 public class Tools 
 {
     // Start DISM/SFC
-    public static bool FileChecker()
-    {
+    public static bool FileChecker() {
         Process process = new Process();
         ProcessStartInfo startInfo = new ProcessStartInfo();
         startInfo.UseShellExecute = true;
@@ -25,8 +24,7 @@ public class Tools
     }
 
     // Start Updates to third party applications
-    public static bool ThirdPartyUpdater()
-    {
+    public static bool ThirdPartyUpdater() {
         Process process = new Process();
         ProcessStartInfo startInfo = new ProcessStartInfo();
         startInfo.UseShellExecute = true;
@@ -39,8 +37,7 @@ public class Tools
     }
 
     // Create Shortcuts
-    private static void Shortcut(string shortcutName, string targetFileLocation)
-    {
+    private static void Shortcut(string shortcutName, string targetFileLocation) {
         // Initialize shortcuts
         string shortcutLocation = Path.Combine(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD", shortcutName + ".lnk");
         WshShell shell = new WshShell();
@@ -51,18 +48,15 @@ public class Tools
     }
 
     // Make NOC Folder
-    public static async Task<bool> MakeNOC(Tool Mb, Tool Cc, Tool Gl)
-    {
+    public static async Task<bool> MakeNOC(Tool Mb, Tool Cc, Tool Gl) {
         string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
         // If directory does not exist, create it
-        if (!Directory.Exists(dir))
-        {
+        if (!Directory.Exists(dir)) {
             DirectoryInfo folder = Directory.CreateDirectory(dir);
 
             // Create desktop.ini file
             string deskIni = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD\desktop.ini";
-            using (StreamWriter sw = new StreamWriter(deskIni))
-            {
+            using (StreamWriter sw = new StreamWriter(deskIni)) {
                 sw.WriteLine("[.ShellClassInfo]");
                 sw.WriteLine("ConfirmFileOp=0");
                 sw.WriteLine("IconFile=nerd.ico");
@@ -74,13 +68,9 @@ public class Tools
             string place = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD\nerd.ico";
             StreamResourceInfo sri = Application.GetResourceStream(new Uri("/nerd.ico", UriKind.Relative));
 
-            if (sri != null)
-            {
-
-                using (Stream stream = sri.Stream)
-                {
-                    using (var file = System.IO.File.Create(place))
-                    {
+            if (sri != null) {
+                using (Stream stream = sri.Stream) {
+                    using (var file = System.IO.File.Create(place)) {
                         await stream.CopyToAsync(file);
                     }
                 }
@@ -101,39 +91,28 @@ public class Tools
 
         // MB Shortcut
         if (System.IO.File.Exists(Mb.ToolLocation))
-        {
             Shortcut("Malwarebytes", Mb.ToolLocation);
-        }
 
         // CC Shortcut
         if (System.IO.File.Exists(Cc.ToolLocation))
-        {
             Shortcut("CCleaner", Cc.ToolLocation);
-        }
 
         // GU Shortcut
         if (System.IO.File.Exists(Gl.ShortcutLocation))
-        {
             Shortcut("Glary Utilities", Gl.ShortcutLocation);
-        }
 
         // ADW Shortcut
         if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")))
-        {
             Shortcut("ADWCleaner", Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe"));
-        }
 
         return true;
     }
 
     // Adds Registry keys so next time Chrome or Edge opens, it updates or asks to install UBlock Origin
-    public static async Task<bool> InstallUB()
-    {
-
+    public static async Task<bool> InstallUB() {
         string valueName = "update_url";
 
-        var GC = await Task.Run<bool>(() =>
-        {
+        var GC = await Task.Run<bool>(() => {
             // Write to Google Chrome
             string value = "https://clients2.google.com/service/update2/crx";
             string key = @"HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\ddkjiahejlhfcafbddmgiahcphecmpfh";
@@ -141,8 +120,7 @@ public class Tools
             return true;
         });
 
-        var edge = await Task.Run<bool>(() =>
-        {
+        var edge = await Task.Run<bool>(() => {
             /// Write to MS Edge
             string eValue = "https://edge.microsoft.com/extensionwebstorebase/v1/crx";
             string eKey = @"HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\cimighlppcgcoapaliogpjjdehbnofhn";
@@ -153,4 +131,3 @@ public class Tools
         return true;
     }
 }
-
