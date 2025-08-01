@@ -30,4 +30,5 @@ public class ToolResource {
     public Tool CCleaner { get; private set; } = new Tool("https://bits.avcdn.net/productfamily_CCLEANER/insttype_FREE/platform_WIN_PIR/installertype_ONLINE/build_RELEASE", "CCSetup.exe", @"C:\Program Files\CCleaner\CCleaner64.exe", "/S");
     public Tool Support { get; private set; } = new Tool("https://s3-us-west-2.amazonaws.com/nerdtools/remote.msi", "Remote.msi", $@"""{Path.Combine(Directory.GetCurrentDirectory(), "Remote.msi")}""", "/qn");
     public Tool Adw { get; private set; } = new Tool("https://adwcleaner.malwarebytes.com/adwcleaner?channel=release", "ADWCleaner.exe", @"cmd.exe", $@"/k ""{Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")}"" /eula /clean /noreboot");
+    public Tool bloatkiller { get; private set; } = new Tool("https://raw.githubusercontent.com/0xdeadgirl/batch-scripts/refs/heads/main/bloatkiller.bat", "bloatkiller.bat", @"cmd.exe", $"/c {Path.Combine(Directory.GetCurrentDirectory(), "bloatkiller.bat")}");
 }

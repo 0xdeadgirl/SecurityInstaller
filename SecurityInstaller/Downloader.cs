@@ -31,7 +31,7 @@ public static class Downloader {
             results.Report($"\n{tool.ToolName} download {rez}\nElapsed Time: {watch.ElapsedMilliseconds}ms");
         }
 
-        if (install == true && !(tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi")) {
+        if (install == true && !(tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi" || tool.ToolName == "bloatkiller.bat")) {
             string rez = await Task.Run(() => Install(tool.ToolName, tool.ToolCliSwitch, results));
 
             results.Report($"{tool.ToolName} install {rez}\nElapsed Time: {watch.ElapsedMilliseconds}ms");
@@ -43,7 +43,7 @@ public static class Downloader {
 
         if (run == true) {
             try {
-                if (tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi") {
+                if (tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi" || tool.ToolName == "bloatkiller.bat") {
                     await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
 
                     results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");

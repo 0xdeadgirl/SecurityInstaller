@@ -141,6 +141,7 @@ namespace SecurityInstaller
             if (mb.IsChecked == true) AddProgressTask(resources.Malwarebytes);
             if (gu.IsChecked == true) AddProgressTask(resources.Glary);
             if (cc.IsChecked == true) AddProgressTask(resources.CCleaner);
+            if (bloatkiller.IsChecked == true) AddProgressTask(resources.bloatkiller);
 
             // if checked
             if (sfc.IsChecked == true) {
