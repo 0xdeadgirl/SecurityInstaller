@@ -8,8 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Threading;
 using static RoundCorners;
 
-namespace SecurityInstaller
-{
+namespace SecurityInstaller {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

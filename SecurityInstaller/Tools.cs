@@ -37,7 +37,7 @@ public class Tools
     }
 
     // Create Shortcuts
-    private static void Shortcut(string shortcutName, string targetFileLocation) {
+    public static void Shortcut(string shortcutName, string targetFileLocation) {
         // Initialize shortcuts
         string shortcutLocation = Path.Combine(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD", shortcutName + ".lnk");
         WshShell shell = new WshShell();
