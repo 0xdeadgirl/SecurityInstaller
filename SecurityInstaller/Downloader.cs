@@ -37,9 +37,7 @@ public static class Downloader {
             results.Report($"{tool.ToolName} install {rez}\nElapsed Time: {watch.ElapsedMilliseconds}ms");
         } else if (install == true && !run && tool.ToolName == "Remote.msi") {
             await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
-
-            if (Directory.Exists(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD"))
-                Tools.Shortcut("Nerds On Call Support", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Nerds On Call Support\Nerds On Call Support");
+            Tools.MakeSupportShortcut();
 
             results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");
         }
@@ -50,8 +48,7 @@ public static class Downloader {
                     await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
 
                     if (tool.ToolName == "Remote.msi")
-                        if (Directory.Exists(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD"))
-                            Tools.Shortcut("Nerds On Call Support", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Nerds On Call Support\Nerds On Call Support");
+                        Tools.MakeSupportShortcut();
 
                     results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");
                 } else {

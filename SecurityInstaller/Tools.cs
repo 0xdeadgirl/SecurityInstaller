@@ -37,7 +37,7 @@ public class Tools
     }
 
     // Create Shortcuts
-    public static void Shortcut(string shortcutName, string targetFileLocation) {
+    private static void Shortcut(string shortcutName, string targetFileLocation) {
         // Initialize shortcuts
         string shortcutLocation = Path.Combine(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD", shortcutName + ".lnk");
         WshShell shell = new WshShell();
@@ -45,6 +45,40 @@ public class Tools
 
         shortcut.TargetPath = targetFileLocation; // The path of the file that will launch when the shortcut is run
         shortcut.Save();
+    }
+
+    /*
+     * Create shortcut for Calling Card in NOC folder.
+     * 
+     * Waiting for the Remote.msi process to end doesn't work, because Remote.msi spawns and detaches a child process,
+     * which then actually installs the Calling Card. Attempting to check for the Calling Card in the file system will
+     * yield no results after Remote.msi is finished executing, we must wait for the Windows Install to finish.
+     * 
+     * I'd like to come back to this and find a cleaner solution, but for now, this solution works. The issue with this
+     * system is that if you have the Windows installer running for anything else, the Calling Card shortcut won't be
+     * installed until that's done.
+     * 
+     * @author Lukas Lynch
+     */
+    public static void MakeSupportShortcut() {
+        const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
+        const string callingCardLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\6gqmpb\CallingCard.exe";
+
+        // No point in continuing if the NOC Folder is present.
+        if (!Directory.Exists(dir))
+            return;
+
+        // This code collects Windows Installer processes, and tries to create the Calling Card shortcut after the Windows Installer process is complete
+        Process[] processes = System.Diagnostics.Process.GetProcessesByName("Windows® installer");
+
+        check:
+        if(processes.Length == 0)
+            if (System.IO.File.Exists(callingCardLocation))
+                Shortcut("Nerds On Call Support", callingCardLocation);
+        else {
+            System.Threading.Thread.Sleep(500); // Wait for 500 milliseconds before checking again
+            goto check;
+        }
     }
 
     // Make NOC Folder
@@ -104,6 +138,9 @@ public class Tools
         // ADW Shortcut
         if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")))
             Shortcut("ADWCleaner", Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe"));
+
+        // Calling card Shortcut
+        MakeSupportShortcut();
 
         return true;
     }
