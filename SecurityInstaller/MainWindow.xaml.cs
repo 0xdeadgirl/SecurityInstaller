@@ -140,7 +140,6 @@ namespace SecurityInstaller {
             if (mb.IsChecked == true) AddProgressTask(resources.Malwarebytes);
             if (gu.IsChecked == true) AddProgressTask(resources.Glary);
             if (cc.IsChecked == true) AddProgressTask(resources.CCleaner);
-            if (bloatkiller.IsChecked == true) AddProgressTask(resources.bloatkiller);
 
             // if checked
             if (sfc.IsChecked == true) {
@@ -164,6 +163,29 @@ namespace SecurityInstaller {
                 tasks.Add(Task.Run(() => Tools.ThirdPartyUpdater()));
                 resultsProgress.Report("\nThird Party Apps Updating");
                 ProgressBar2.Value += 1;
+            }
+
+            if (bloatkiller.IsChecked == true) {
+                Tool tool = resources.bloatkiller;
+                // Add to download List
+                report.DownloadPercentagesList.Add(tool);
+
+                // create progress reporter to update specific value
+                IProgress<int> progressVal = new Progress<int>(value => {
+                    // Update our tool refrence
+                    tool.PercentageComplete = value;
+
+                    // send updated report model to event
+                    progress.Report(report);
+                });
+
+                tasks.Add(Downloader.StartDownload(
+                tool,
+                progressVal,
+                progressBarProgress,
+                resultsProgress,
+                true, false, true
+                ));
             }
         }
 
