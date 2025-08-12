@@ -301,9 +301,6 @@
     <Resource Include="nerd.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cortana.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\astro.png" />
   </ItemGroup>
   <ItemGroup>

@@ -105,7 +105,7 @@
             </Image>
 
 
-            <TextBlock Text="AutoTune"
+            <TextBlock Text="Security Installer"
                        Foreground="#BFC9FE"
                        Grid.Column="1"
                        Grid.ColumnSpan="3"
@@ -383,7 +383,7 @@
                                 </StackPanel.RenderTransform>
 
                                 <CheckBox x:Name="sfc"
-                                          Content="Start Dism/SFC"
+                                          Content="Start DISM/SFC"
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
@@ -403,7 +403,7 @@
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
                                 <CheckBox x:Name="uBlock"
-                                          Content="Install UBlock Origin to Edge/Chrome"
+                                          Content="Install uBlock Origin Lite in Chrome/Edge"
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
@@ -641,17 +641,6 @@
                              Width="80">
                         <Grid Background="Transparent"
                               Width="377">
-                            <Image Source="Images/cortana.png"
-                                   Panel.ZIndex="10"
-                                   Margin="237,182,-37,0">
-                                <Image.Effect>
-                                    <DropShadowEffect BlurRadius="30"
-                                                      Direction="-8"
-                                                      RenderingBias="Quality"
-                                                      ShadowDepth="2"
-                                                      Color="LightBlue" />
-                                </Image.Effect>
-                            </Image>
                             <Border CornerRadius="2"
                                     BorderThickness="0,0,0,0"
                                     BorderBrush="#2360DB"
