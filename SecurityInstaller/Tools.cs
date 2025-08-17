@@ -1,12 +1,13 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows;
-using System.IO;
+﻿using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using System;
-using IWshRuntimeLibrary;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Management;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Resources;
-// using static ToolResource;
 
 public class Tools 
 {
@@ -50,13 +51,8 @@ public class Tools
     /*
      * Create shortcut for Calling Card in NOC folder.
      * 
-     * Waiting for the Remote.msi process to end doesn't work, because Remote.msi spawns and detaches a child process,
-     * which then actually installs the Calling Card. Attempting to check for the Calling Card in the file system will
-     * yield no results after Remote.msi is finished executing, we must wait for the Windows Install to finish.
-     * 
-     * I'd like to come back to this and find a cleaner solution, but for now, this solution works. The issue with this
-     * system is that if you have the Windows installer running for anything else, the Calling Card shortcut won't be
-     * installed until that's done.
+     * If there's a Windows Installer process running "Remote.msi," we will wait until that's finished executing, then we will attempt to
+     * create the Calling Card shortcut in the NOC folder.
      * 
      * @author Lukas Lynch
      */
@@ -64,21 +60,25 @@ public class Tools
         const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
         const string callingCardLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\6gqmpb\CallingCard.exe";
 
-        // No point in continuing if the NOC Folder is present.
+        // No point in continuing if the NOC Folder isn't present.
         if (!Directory.Exists(dir))
             return;
 
-        // This code collects Windows Installer processes, and tries to create the Calling Card shortcut after the Windows Installer process is complete
-        Process[] processes = System.Diagnostics.Process.GetProcessesByName("Windows® installer");
-
-        check:
-        if(processes.Length == 0)
-            if (System.IO.File.Exists(callingCardLocation))
-                Shortcut("Nerds On Call Support", callingCardLocation);
-        else {
-            System.Threading.Thread.Sleep(500); // Wait for 500 milliseconds before checking again
-            goto check;
+        // We check for all Windows Installer processes, and if they're running on "Remote.msi" (as indicated by its CommandLine arguments),
+        // we wait for it to exit, then break out of the loop and attempt to create the shortcut in the NOC folder.
+        foreach (Process process in Process.GetProcessesByName("msiexec")) {
+            using (var searcher = new ManagementObjectSearcher("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id))
+            {
+                var managementObject = searcher.Get().Cast<System.Management.ManagementObject>().FirstOrDefault();
+                if (managementObject != null && managementObject["CommandLine"]?.ToString().Contains("Remote.msi") == true) {
+                    process.WaitForExit();
+                    break;
+                }
+            }
         }
+
+        if (System.IO.File.Exists(callingCardLocation))
+            Shortcut("Nerds On Call Support", callingCardLocation);
     }
 
     // Make NOC Folder
