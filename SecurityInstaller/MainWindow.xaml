@@ -408,7 +408,7 @@
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
                                 <CheckBox x:Name="bloatkiller"
-                                          Content="Disabled unnecessary services"
+                                          Content="Disable unnecessary services"
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
@@ -598,10 +598,10 @@
                                     </StackPanel>
                                 </Grid>
                             </ScrollViewer>
-                            <Button Margin="295,295,35,10"
+                            <Button Margin="275,295,35,10"
                                     Name="CopyBtn"
                                     Content="Copy"
-                                    FontSize="11"
+                                    FontSize="12"
                                     Click="CopyBtn_Click"
                                     Foreground="#E8E9ED"
                                     FontWeight="Bold"
@@ -644,7 +644,7 @@
                             <Border CornerRadius="2"
                                     BorderThickness="0,0,0,0"
                                     BorderBrush="#2360DB"
-                                    Background="Black">
+                                    Background="Transparent">
 
                             </Border>
                             <TextBox x:Name="ScriptOutput"
