@@ -167,6 +167,7 @@ namespace SecurityInstaller {
 
             if (bloatkiller.IsChecked == true) {
                 Tool tool = resources.bloatkiller;
+
                 // Add to download List
                 report.DownloadPercentagesList.Add(tool);
 
@@ -180,11 +181,11 @@ namespace SecurityInstaller {
                 });
 
                 tasks.Add(Downloader.StartDownload(
-                tool,
-                progressVal,
-                progressBarProgress,
-                resultsProgress,
-                true, false, true
+                    tool,
+                    progressVal,
+                    progressBarProgress,
+                    resultsProgress,
+                    true, false, true
                 ));
             }
         }
