@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SecurityInstaller"
         Loaded="OnLoad"
         mc:Ignorable="d"
-        Title="AutoTune"
+        Title="Security Installer"
         Height="450"
         Width="800"
         Background="#222526"
