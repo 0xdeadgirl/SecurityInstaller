@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SecurityInstaller"
         Loaded="OnLoad"
         mc:Ignorable="d"
-        Title="Security Installer"
+        Title="Security Installer — v4.5.0b"
         Height="450"
         Width="800"
         Background="#222526"
@@ -105,10 +105,10 @@
             </Image>
 
 
-            <TextBlock Text="Security Installer"
+            <TextBlock Text="Security Installer — v4.5.0b"
                        Foreground="#BFC9FE"
                        Grid.Column="1"
-                       Grid.ColumnSpan="3"
+                       Grid.ColumnSpan="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontWeight="Medium">
@@ -320,7 +320,7 @@
                                 </StackPanel.RenderTransform>
 
                                 <CheckBox x:Name="cbSwitch"
-                                          Content="ALL Tuneup Tools"
+                                          Content="ALL Programs"
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           IsChecked="True"

@@ -40,7 +40,7 @@ public class Tools
     // Create Shortcuts
     private static void Shortcut(string shortcutName, string targetFileLocation) {
         // Initialize shortcuts
-        string shortcutLocation = Path.Combine(@"C:\Users\Public\Desktop\Nerds On Call 800-919NERD", shortcutName + ".lnk");
+        string shortcutLocation = Path.Combine(@"C:\Users\Public\Desktop\Nerds On Call 800-919-6373", shortcutName + ".lnk");
         WshShell shell = new WshShell();
         IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
 
@@ -57,7 +57,7 @@ public class Tools
      * @author Lukas Lynch
      */
     public static void MakeSupportShortcut() {
-        const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
+        const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373";
         const string callingCardLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\6gqmpb\CallingCard.exe";
 
         // No point in continuing if the NOC Folder isn't present.
@@ -83,13 +83,17 @@ public class Tools
 
     // Make NOC Folder
     public static async Task<bool> MakeNOC(Tool Mb, Tool Cc, Tool Gl) {
-        string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
+        const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373";
+        const string oldDir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
+
         // If directory does not exist, create it
-        if (!Directory.Exists(dir)) {
+        if (Directory.Exists(oldDir))
+            Directory.Move(oldDir, dir);
+        else if (!Directory.Exists(dir)) {
             DirectoryInfo folder = Directory.CreateDirectory(dir);
 
-            // Create desktop.ini file
-            string deskIni = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD\desktop.ini";
+                // Create desktop.ini file
+                string deskIni = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373\desktop.ini";
             using (StreamWriter sw = new StreamWriter(deskIni)) {
                 sw.WriteLine("[.ShellClassInfo]");
                 sw.WriteLine("ConfirmFileOp=0");
@@ -99,7 +103,7 @@ public class Tools
                 sw.Close();
             }
 
-            string place = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD\nerd.ico";
+            string place = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373\nerd.ico";
             StreamResourceInfo sri = Application.GetResourceStream(new Uri("/nerd.ico", UriKind.Relative));
 
             if (sri != null) {
