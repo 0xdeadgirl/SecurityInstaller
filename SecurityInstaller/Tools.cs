@@ -60,6 +60,9 @@ public class Tools
         const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373";
         const string callingCardLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\6gqmpb\CallingCard.exe";
 
+        // A lot of customers have an older version with the old channel ID
+        const string callingCardAltLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\eost6i\CallingCard.exe";
+
         // No point in continuing if the NOC Folder isn't present.
         if (!Directory.Exists(dir))
             return;
@@ -79,6 +82,8 @@ public class Tools
 
         if (System.IO.File.Exists(callingCardLocation))
             Shortcut("Nerds On Call Support", callingCardLocation);
+        else if (System.IO.File.Exists(callingCardAltLocation))
+            Shortcut("Nerds On Call Support", callingCardAltLocation);
     }
 
     // Make NOC Folder

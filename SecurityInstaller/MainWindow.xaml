@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SecurityInstaller"
         Loaded="OnLoad"
         mc:Ignorable="d"
-        Title="Security Installer — v4.5.0b"
+        Title="Security Installer — v2.4.a"
         Height="450"
         Width="800"
         Background="#222526"
@@ -105,7 +105,7 @@
             </Image>
 
 
-            <TextBlock Text="Security Installer — v4.5.0b"
+            <TextBlock Text="Security Installer — v2.4.a"
                        Foreground="#BFC9FE"
                        Grid.Column="1"
                        Grid.ColumnSpan="5"
