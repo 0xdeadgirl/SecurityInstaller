@@ -58,10 +58,12 @@ public class Tools
      */
     public static void MakeSupportShortcut() {
         const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373";
-        const string callingCardLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\6gqmpb\CallingCard.exe";
 
-        // A lot of customers have an older version with the old channel ID
-        const string callingCardAltLocation = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\eost6i\CallingCard.exe";
+        // Since there are multiple possible channel IDs, we'll iterate through them. We need to break up the directory and executable since
+        // we need to combine them with the ID in the middle.
+        const string callingCardDirectory = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\";
+        const string callingCardExecutable = @"\CallingCard.exe";
+        string[] channelIds = { "6gqmpb", "eost6i", "58pq3u" };
 
         // No point in continuing if the NOC Folder isn't present.
         if (!Directory.Exists(dir))
@@ -70,8 +72,7 @@ public class Tools
         // We check for all Windows Installer processes, and if they're running on "Remote.msi" (as indicated by its CommandLine arguments),
         // we wait for it to exit, then break out of the loop and attempt to create the shortcut in the NOC folder.
         foreach (Process process in Process.GetProcessesByName("msiexec")) {
-            using (var searcher = new ManagementObjectSearcher("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id))
-            {
+            using (var searcher = new ManagementObjectSearcher("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id)) {
                 var managementObject = searcher.Get().Cast<System.Management.ManagementObject>().FirstOrDefault();
                 if (managementObject != null && managementObject["CommandLine"]?.ToString().Contains("Remote.msi") == true) {
                     process.WaitForExit();
@@ -80,10 +81,13 @@ public class Tools
             }
         }
 
-        if (System.IO.File.Exists(callingCardLocation))
-            Shortcut("Nerds On Call Support", callingCardLocation);
-        else if (System.IO.File.Exists(callingCardAltLocation))
-            Shortcut("Nerds On Call Support", callingCardAltLocation);
+        foreach (string id in channelIds) {
+            string path = callingCardDirectory + id + callingCardExecutable;
+            if (System.IO.File.Exists(path)) {
+                Shortcut("Nerds On Call Support", path);
+                break;
+            }
+        }
     }
 
     // Make NOC Folder
