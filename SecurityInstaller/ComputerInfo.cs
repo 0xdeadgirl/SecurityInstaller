@@ -193,6 +193,30 @@ public static class ComputerInfo {
         return memSlotsString;
     }
 
+    private static string GetRamSpeed() {
+        int minSpeed = -1;
+        ManagementScope oMs = new ManagementScope();
+        ObjectQuery oQuery2 = new ObjectQuery("SELECT Speed FROM Win32_PhysicalMemory");
+
+        try {
+            using (ManagementObjectSearcher oSearcher2 = new ManagementObjectSearcher(oMs, oQuery2)) {
+                using (ManagementObjectCollection oCollection2 = oSearcher2.Get()) {
+                    foreach (ManagementObject obj in oCollection2) {
+                        int speed = Convert.ToInt32(obj["Speed"]);
+                        if (minSpeed == -1)
+                            minSpeed = speed;
+                        else if (speed < minSpeed)
+                            minSpeed = speed;
+
+                            obj.Dispose();
+                    }
+                }
+            }
+        } catch (Exception ex) { return ex.Message; }
+
+        return minSpeed.ToString() + "MHz";
+    }
+
     // ManagementClass mc = new ManagementClass("Win32_Processor")
     private static string GetCpuInfo() {
         string cpuMan = string.Empty;
@@ -282,6 +306,7 @@ public static class ComputerInfo {
     public static readonly string SystemSku = GetSystemSKU();
     public static readonly string RamSlots = GetRamSlots();
     public static readonly string MaxMemory = GetMemory();
+    public static readonly string RamSpeed = GetRamSpeed();
     public static readonly string CPU = GetCpuInfo();
     public static readonly string GPU = GetGPUInfo();
     public static readonly string Partitions = GetDriveInfo();
@@ -339,6 +364,7 @@ public static class ComputerInfo {
     
 {"\tSticks: " + RamSlots}
 {"\tTotal: " + MaxMemory}
+{"\tMinimum Speed: " + RamSpeed}
 
             
 --------------------------------------------------------
