@@ -633,6 +633,41 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            <Button Margin="204,295,106,10"
+                                    Name="ExportBtn"
+                                    Content="Export"
+                                    FontSize="12"
+                                    Click="ExportBtn_Click"
+                                    Foreground="#E8E9ED"
+                                    FontWeight="Bold"
+                                    BorderThickness="0,0,0,0">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background"
+                                                Value="#033B81" />
+                                        <Setter Property="Cursor"
+                                                Value="Hand" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="#002B54" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="5"
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </Grid>
                     </TabItem>
 

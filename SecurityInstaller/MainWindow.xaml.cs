@@ -248,6 +248,18 @@ namespace SecurityInstaller {
             }
         }
 
+        // export asset info to {current directory}\asset.txt
+        private void ExportBtn_Click(object sender, EventArgs e) {
+            try {
+                File.WriteAllText(
+                    Path.Combine(Directory.GetCurrentDirectory(), "asset.txt"),
+                    ComputerInfo.asset
+                );
+            } catch {
+                ProgressText.Text = $"Failed to create {Directory.GetCurrentDirectory()}\\asset.txt";
+            }
+        }
+
         // if checked enable child checkboxes else disable children
         private void CBSwitch_Click(object sender, RoutedEventArgs e) {
             if (cbSwitch.IsChecked == false) {
