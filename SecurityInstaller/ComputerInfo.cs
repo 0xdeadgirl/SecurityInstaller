@@ -8,9 +8,12 @@ public static class ComputerInfo {
         string dInfo = string.Empty;
 
         try {
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            DriveInfo[] allDrives = System.IO.DriveInfo.GetDrives();
 
             foreach (DriveInfo drive in allDrives) {
+                if (drive.DriveType.ToString() == "CDRom")
+                    continue;
+
                 string freeSpace = Bytes.Format(drive.TotalFreeSpace);
                 string totalSpace = Bytes.Format(drive.TotalSize);
                 string format = drive.DriveFormat;
@@ -364,7 +367,7 @@ public static class ComputerInfo {
     
 {"\tSticks: " + RamSlots}
 {"\tTotal: " + MaxMemory}
-{"\tMinimum Speed: " + RamSpeed}
+{"\tSpeed: " + RamSpeed}
 
             
 --------------------------------------------------------
