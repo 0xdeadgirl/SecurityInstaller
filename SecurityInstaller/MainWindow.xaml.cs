@@ -293,6 +293,25 @@ namespace SecurityInstaller {
             }
         }
 
+        private static Boolean firstLaunch = true;
+        private static Boolean percyWrenchVisible = false;
+        private void TogglePercy(object sender, RoutedEventArgs e) {
+            if(firstLaunch) {
+                firstLaunch = false;
+                return;
+            }
+
+            if (percyWrenchVisible) {
+                PercyWrench.Opacity = 0;
+                PercyClipboard.Opacity = 0.5;
+                percyWrenchVisible = false;
+            } else {
+                PercyClipboard.Opacity = 0;
+                PercyWrench.Opacity = 0.5;
+                percyWrenchVisible = true;
+            }
+        }
+
         /// <summary>
         /// Main Window Animation
         /// </summary>

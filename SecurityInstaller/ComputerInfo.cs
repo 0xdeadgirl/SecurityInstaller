@@ -16,7 +16,7 @@ public static class ComputerInfo {
                 string format = drive.DriveFormat;
                 string name = drive.Name;
 
-                dInfo += ($"{name} {format} - {freeSpace}GB free of: {totalSpace}GB\n");
+                dInfo += ($"{name} {format} - {freeSpace} free of: {totalSpace}\n");
             }
         } catch (Exception ex) { return ex.Message; }
 

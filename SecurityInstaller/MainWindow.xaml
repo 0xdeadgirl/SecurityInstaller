@@ -494,7 +494,22 @@
                Source="Images\astro.png"
                Stretch="Fill">
         </Image>
-
+        <Image Name="PercyClipboard"
+               Height="415"
+               Grid.Column="1"
+               Grid.Row="1"
+               Margin="95,5,-95,5" 
+               Source="Images\percy-clipboard.png"
+               Opacity="0.5">
+        </Image>
+        <Image Name="PercyWrench"
+               Height="415"
+               Grid.Column="1"
+               Grid.Row="1"
+               Margin="95,5,-95,5" 
+               Source="Images\percy-wrench.png"
+               Opacity="0.0">
+        </Image>
         <StackPanel Grid.Row="1"
                     Grid.Column="1">
             <StackPanel.Effect>
@@ -508,7 +523,8 @@
                 <TabControl Margin="10,5,10,0"
                             Height="350"
                             Background="Transparent"
-                            BorderThickness="0,0,0,0">
+                            BorderThickness="0,0,0,0"
+                            SelectionChanged="TogglePercy">
                     <TabControl.Resources>
                         <Style TargetType="{x:Type TabItem}">
                             <Setter Property="Template">
