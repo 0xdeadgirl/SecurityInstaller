@@ -11,8 +11,12 @@ public static class ComputerInfo {
             DriveInfo[] allDrives = System.IO.DriveInfo.GetDrives();
 
             foreach (DriveInfo drive in allDrives) {
-                if (drive.DriveType.ToString() == "CDRom")
-                    continue;
+                switch (drive.DriveType) {
+                    case DriveType.Fixed:
+                        break;
+                    default:
+                        continue;
+                }
 
                 string freeSpace = Bytes.Format(drive.TotalFreeSpace);
                 string totalSpace = Bytes.Format(drive.TotalSize);
