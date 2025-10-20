@@ -255,6 +255,7 @@ namespace SecurityInstaller {
                     Path.Combine(Directory.GetCurrentDirectory(), "asset.txt"),
                     ComputerInfo.asset
                 );
+                ProgressText.Text = $"Created {Directory.GetCurrentDirectory()}\\asset.txt";
             } catch {
                 ProgressText.Text = $"Failed to create {Directory.GetCurrentDirectory()}\\asset.txt";
             }
