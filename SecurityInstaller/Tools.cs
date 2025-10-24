@@ -149,7 +149,9 @@ public class Tools
             Shortcut("Glary Utilities", Gl.ShortcutLocation);
 
         // ADW Shortcut
-        if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")))
+        if (System.IO.File.Exists(@"C:\AdwCleaner\ADWCleaner.exe"))
+            Shortcut("ADWCleaner", @"C:\AdwCleaner\ADWCleaner.exe");
+        else if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")))
             Shortcut("ADWCleaner", Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe"));
 
         // Calling card Shortcut
