@@ -350,6 +350,12 @@
                                           Margin="45,5,0,5"
                                           IsChecked="True"
                                           FontWeight="SemiBold" />
+                                <CheckBox x:Name="reflect"
+                                          Content="Macrium Reflect 7"
+                                          Foreground="#E8E9ED"
+                                          Margin="45,5,0,5"
+                                          IsChecked="True"
+                                          FontWeight="SemiBold" />
                             </StackPanel>
                         </TabItem>
 

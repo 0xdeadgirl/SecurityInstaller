@@ -140,6 +140,7 @@ namespace SecurityInstaller {
             if (mb.IsChecked == true) AddProgressTask(resources.Malwarebytes);
             if (gu.IsChecked == true) AddProgressTask(resources.Glary);
             if (cc.IsChecked == true) AddProgressTask(resources.CCleaner);
+            if (reflect.IsChecked == true) AddProgressTask(resources.Macrium);
 
             // if checked
             if (sfc.IsChecked == true) {
@@ -279,7 +280,12 @@ namespace SecurityInstaller {
                 cc.IsEnabled = false;
                 cc.IsChecked = false;
                 cc.Opacity = .1;
-            } else if (cbSwitch.IsChecked == true) {
+
+                reflect.IsEnabled = false;
+                reflect.IsChecked = false;
+                reflect.Opacity = .1;
+            }
+            else if (cbSwitch.IsChecked == true) {
                 adw.IsEnabled = true;
                 adw.Opacity = 1;
 
@@ -291,6 +297,9 @@ namespace SecurityInstaller {
 
                 cc.IsEnabled = true;
                 cc.Opacity = 1;
+
+                reflect.IsEnabled = true;
+                reflect.Opacity = 1;
             }
         }
 

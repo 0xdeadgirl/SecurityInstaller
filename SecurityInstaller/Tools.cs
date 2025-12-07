@@ -14,10 +14,11 @@ public class Tools
     // Start DISM/SFC
     public static bool FileChecker() {
         Process process = new Process();
-        ProcessStartInfo startInfo = new ProcessStartInfo();
-        startInfo.UseShellExecute = true;
-        startInfo.FileName = "cmd.exe";
-        startInfo.Arguments = "pause | /k dism /online /cleanup-image /restorehealth&sfc /scannow";
+        ProcessStartInfo startInfo = new ProcessStartInfo {
+            UseShellExecute = true,
+            FileName = "cmd.exe",
+            Arguments = "pause | /k dism /online /cleanup-image /restorehealth&sfc /scannow"
+        };
         process.StartInfo = startInfo;
         process.Start();
 
@@ -27,10 +28,11 @@ public class Tools
     // Start Updates to third party applications
     public static bool ThirdPartyUpdater() {
         Process process = new Process();
-        ProcessStartInfo startInfo = new ProcessStartInfo();
-        startInfo.UseShellExecute = true;
-        startInfo.FileName = "cmd.exe";
-        startInfo.Arguments = "pause | /k winget upgrade --all";
+        ProcessStartInfo startInfo = new ProcessStartInfo {
+            UseShellExecute = true,
+            FileName = "cmd.exe",
+            Arguments = "pause | /k winget upgrade --all"
+        };
         process.StartInfo = startInfo;
         process.Start();
 

@@ -31,4 +31,5 @@ public class ToolResource {
     public Tool Support { get; private set; } = new Tool("https://s3-us-west-2.amazonaws.com/nerdtools/remote.msi", "Remote.msi", $@"""{Path.Combine(Directory.GetCurrentDirectory(), "Remote.msi")}""", "/qn");
     public Tool Adw { get; private set; } = new Tool("https://adwcleaner.malwarebytes.com/adwcleaner?channel=release", "ADWCleaner.exe", @"cmd.exe", $@"/k ""{Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")}"" /eula /clean /noreboot");
     public Tool bloatkiller { get; private set; } = new Tool("https://raw.githubusercontent.com/0xdeadgirl/batch-scripts/refs/heads/main/bloatkiller.bat", "bloatkiller.bat", @"cmd.exe", $@"/c ""{Path.Combine(Directory.GetCurrentDirectory(), "bloatkiller.bat")}""");
+    public Tool Macrium { get; private set; } = new Tool("https://download.macrium.com/reflect/v7/v7.3.6391/reflect_setup_free_x64.exe", "MacriumReflect7_setup.exe", @"C:\Program Files\Macrium\Reflect\Reflect.exe", "/qn /norestart NODESKTOPSHORTCUT=YES");
 }
