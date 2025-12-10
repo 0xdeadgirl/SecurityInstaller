@@ -38,6 +38,7 @@ namespace SecurityInstaller {
             timer.Start();
 
             DisplayHardwareInfo();
+            Ninite.FindNiniteInstallers(ninite);
         }
 
         private async void DisplayHardwareInfo() {
@@ -189,6 +190,14 @@ namespace SecurityInstaller {
                     true, false, true
                 ));
             }
+
+            // Run Ninite installers
+            foreach(Ninite.ninite installer in Ninite.ninite_installers)
+                if(installer.box.IsChecked == true)
+                    tasks.Add(Task.Run(() => Ninite.RunNinite(
+                        installer.path,
+                        resultsProgress
+                    )));
         }
 
         private void AddProgressTask(Tool tool) {
@@ -338,5 +347,5 @@ namespace SecurityInstaller {
             }
             ProgressText.Text = $"{e.DownloadCompleted}/{e.DownloadCount} items - Download {e.TotalPercentageCompleted()}% complete";
         }
-    }
+    }    
 }

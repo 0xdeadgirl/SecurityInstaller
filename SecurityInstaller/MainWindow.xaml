@@ -420,6 +420,40 @@
                                           FontWeight="SemiBold" />
                             </StackPanel>
                         </TabItem>
+
+                        <TabItem x:Name="niniteTab"
+                            Header="Ninite installers"
+                            Width="100"
+                            Margin="0,0,0,0">
+                            <StackPanel Background="Transparent"
+                                        Margin="0,30,0,0"
+                                        x:Name="ninite">
+
+                                <StackPanel.Effect>
+                                    <DropShadowEffect BlurRadius="15"
+                                        Direction="-8"
+                                        RenderingBias="Quality"
+                                        ShadowDepth="2" />
+                                </StackPanel.Effect>
+
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Cursor"
+                                            Value="Hand" />
+                                    </Style>
+                                </StackPanel.Style>
+
+                                <StackPanel.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1.1"
+                                            ScaleY="1.1" />
+                                        <TranslateTransform Y="-15" />
+                                    </TransformGroup>
+                                </StackPanel.RenderTransform>
+
+                            </StackPanel>
+                        </TabItem>
+
                     </TabControl>
                 </Grid>
 
