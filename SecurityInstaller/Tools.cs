@@ -93,7 +93,7 @@ public class Tools
     }
 
     // Make NOC Folder
-    public static async Task<bool> MakeNOC(Tool Mb, Tool Cc, Tool Gl) {
+    public static async Task<bool> MakeNOC(Tool Mb, Tool Mr, Tool Gl) {
         const string dir = @"C:\Users\Public\Desktop\Nerds On Call 800-919-6373";
         const string oldDir = @"C:\Users\Public\Desktop\Nerds On Call 800-919NERD";
 
@@ -143,8 +143,8 @@ public class Tools
             Shortcut("Malwarebytes", Mb.ToolLocation);
 
         // CC Shortcut
-        if (System.IO.File.Exists(Cc.ToolLocation))
-            Shortcut("CCleaner", Cc.ToolLocation);
+        if (System.IO.File.Exists(Mr.ToolLocation))
+            Shortcut("Macrium Reflect", Mr.ToolLocation);
 
         // GU Shortcut
         if (System.IO.File.Exists(Gl.ShortcutLocation))

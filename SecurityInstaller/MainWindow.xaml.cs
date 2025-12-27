@@ -109,7 +109,7 @@ namespace SecurityInstaller {
             // If folder is checked make folder
             if (noc.IsChecked == true) {
                 try {
-                    await Tools.MakeNOC(resources.Malwarebytes, resources.CCleaner, resources.Glary);
+                    await Tools.MakeNOC(resources.Malwarebytes, resources.Macrium, resources.Glary);
                     ScriptOutput.AppendText("\n\nNOC Folder Created");
                     ProgressBar2.Value += 1;
                 } catch (Exception ex) {
@@ -121,10 +121,6 @@ namespace SecurityInstaller {
             // Delete MB shortcut from installer
             if (File.Exists(@"C:\Users\Public\Desktop\Malwarebytes.lnk"))
                 File.Delete(@"C:\Users\Public\Desktop\Malwarebytes.lnk");
-
-            // Delete CC shortcut from installer
-            if (File.Exists(@"C:\Users\Public\Desktop\CCleaner.lnk"))
-                File.Delete(@"C:\Users\Public\Desktop\CCleaner.lnk");
 
             // Delete GU shortcut from installer
             if (File.Exists(@"C:\Users\Public\Desktop\Glary Utilities.lnk"))
@@ -140,7 +136,6 @@ namespace SecurityInstaller {
             if (adw.IsChecked == true) AddProgressTask(resources.Adw);
             if (mb.IsChecked == true) AddProgressTask(resources.Malwarebytes);
             if (gu.IsChecked == true) AddProgressTask(resources.Glary);
-            if (cc.IsChecked == true) AddProgressTask(resources.CCleaner);
             if (reflect.IsChecked == true) AddProgressTask(resources.Macrium);
 
             // if checked
@@ -286,10 +281,6 @@ namespace SecurityInstaller {
                 gu.IsChecked = false;
                 gu.Opacity = .1;
 
-                cc.IsEnabled = false;
-                cc.IsChecked = false;
-                cc.Opacity = .1;
-
                 reflect.IsEnabled = false;
                 reflect.IsChecked = false;
                 reflect.Opacity = .1;
@@ -303,9 +294,6 @@ namespace SecurityInstaller {
 
                 gu.IsEnabled = true;
                 gu.Opacity = 1;
-
-                cc.IsEnabled = true;
-                cc.Opacity = 1;
 
                 reflect.IsEnabled = true;
                 reflect.Opacity = 1;
