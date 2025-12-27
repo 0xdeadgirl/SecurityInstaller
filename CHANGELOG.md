@@ -10,11 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - [optional] Create de-branded fork
 
 ## [Unreleased]
-## [3.0.1] - 12-26-2025
+## [3.b.1] - 12-26-2025
 ### Changed
 - Version number (2.4.0 -> 3.0) - New anticipated release version number
 
-## [3.0.b] - 12-26-2025
+## [3.b.0] - 12-26-2025
 ### Added
 - Macrium Reflect 7 (Programs tab)
 - New "Ninite" tab - Populated by executables in a local `ninite` folder
