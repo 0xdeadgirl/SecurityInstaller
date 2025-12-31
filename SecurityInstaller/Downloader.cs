@@ -45,7 +45,8 @@ public static class Downloader {
                 Directory.CreateDirectory(@"C:\AdwCleaner");
                 File.Copy(
                     Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe"),
-                    @"C:\AdwCleaner\ADWCleaner.exe"
+                    @"C:\AdwCleaner\ADWCleaner.exe",
+                    true
                 );
             }
         }
