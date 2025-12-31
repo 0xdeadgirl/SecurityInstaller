@@ -291,7 +291,7 @@
                         </TabControl.Resources>
 
                         <TabItem x:Name="programs"
-                                 Header="Programs"
+                                 Header="Tuneup"
                                  Width="80"
                                  Margin="0,0,0,0">
                             <StackPanel Background="Transparent"
@@ -340,12 +340,6 @@
                                           FontWeight="SemiBold" />
                                 <CheckBox x:Name="gu"
                                           Content="Glary Utilities"
-                                          Foreground="#E8E9ED"
-                                          Margin="45,5,0,5"
-                                          IsChecked="True"
-                                          FontWeight="SemiBold" />
-                                <CheckBox x:Name="reflect"
-                                          Content="Macrium Reflect 7"
                                           Foreground="#E8E9ED"
                                           Margin="45,5,0,5"
                                           IsChecked="True"
@@ -412,11 +406,16 @@
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
+                                <CheckBox x:Name="reflect"
+                                          Content="Install Macrium Reflect 7"
+                                          Foreground="#E8E9ED"
+                                          Margin="20,5,0,5"
+                                          FontWeight="SemiBold" />
                             </StackPanel>
                         </TabItem>
 
-                        <TabItem x:Name="niniteTab"
-                            Header="Ninite installers"
+                        <TabItem x:Name="installersTab"
+                            Header="Misc. Installers"
                             Width="100"
                             Margin="0,0,0,0">
                             <StackPanel Background="Transparent"

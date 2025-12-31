@@ -268,7 +268,7 @@
     <Compile Include="Bytes.cs" />
     <Compile Include="ComputerInfo.cs" />
     <Compile Include="Downloader.cs" />
-    <Compile Include="Ninite.cs" />
+    <Compile Include="Installers.cs" />
     <Compile Include="ProgressReportModel.cs" />
     <Compile Include="ToolResource.cs" />
     <Compile Include="RoundCorners.cs" />

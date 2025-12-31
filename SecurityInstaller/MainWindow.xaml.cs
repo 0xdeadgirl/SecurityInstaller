@@ -38,7 +38,7 @@ namespace SecurityInstaller {
             timer.Start();
 
             DisplayHardwareInfo();
-            Ninite.FindNiniteInstallers(ninite);
+            Installers.FindMiscInstallers(ninite);
         }
 
         private async void DisplayHardwareInfo() {
@@ -186,10 +186,10 @@ namespace SecurityInstaller {
                 ));
             }
 
-            // Run Ninite installers
-            foreach(Ninite.ninite installer in Ninite.ninite_installers)
+            // Run misc. installers
+            foreach(Installers.installer installer in Installers.misc_installers)
                 if(installer.box.IsChecked == true)
-                    tasks.Add(Task.Run(() => Ninite.RunNinite(
+                    tasks.Add(Task.Run(() => Installers.RunInstaller(
                         installer.path,
                         resultsProgress
                     )));
@@ -280,10 +280,6 @@ namespace SecurityInstaller {
                 gu.IsEnabled = false;
                 gu.IsChecked = false;
                 gu.Opacity = .1;
-
-                reflect.IsEnabled = false;
-                reflect.IsChecked = false;
-                reflect.Opacity = .1;
             }
             else if (cbSwitch.IsChecked == true) {
                 adw.IsEnabled = true;
@@ -294,9 +290,6 @@ namespace SecurityInstaller {
 
                 gu.IsEnabled = true;
                 gu.Opacity = 1;
-
-                reflect.IsEnabled = true;
-                reflect.Opacity = 1;
             }
         }
 
