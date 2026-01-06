@@ -95,19 +95,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Image Source="nerd.ico">
-                <Image.Effect>
-                    <DropShadowEffect BlurRadius="15"
-                                      Direction="-8"
-                                      RenderingBias="Quality"
-                                      ShadowDepth="2" />
-                </Image.Effect>
-            </Image>
-
 
             <TextBlock Text="Security Installer — v3.0"
                        Foreground="#BFC9FE"
-                       Grid.Column="1"
+                       Grid.Column="0"
                        Grid.ColumnSpan="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -386,16 +377,6 @@
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
-                                <CheckBox x:Name="noc"
-                                          Content="Make NOC Folder"
-                                          Foreground="#E8E9ED"
-                                          Margin="20,5,0,5"
-                                          FontWeight="SemiBold" />
-                                <CheckBox x:Name="remote"
-                                          Content="Install/Repair NOC Calling Card"
-                                          Foreground="#E8E9ED"
-                                          Margin="20,5,0,5"
-                                          FontWeight="SemiBold" />
                                 <CheckBox x:Name="uBlock"
                                           Content="Install uBlock Origin Lite in Chrome/Edge"
                                           Foreground="#E8E9ED"
@@ -527,22 +508,6 @@
                Source="Images\astro.png"
                Stretch="Fill">
         </Image>
-        <Image Name="PercyClipboard"
-               Height="415"
-               Grid.Column="1"
-               Grid.Row="1"
-               Margin="95,5,-95,5" 
-               Source="Images\percy-clipboard.png"
-               Opacity="0.5">
-        </Image>
-        <Image Name="PercyWrench"
-               Height="415"
-               Grid.Column="1"
-               Grid.Row="1"
-               Margin="95,5,-95,5" 
-               Source="Images\percy-wrench.png"
-               Opacity="0.0">
-        </Image>
         <StackPanel Grid.Row="1"
                     Grid.Column="1">
             <StackPanel.Effect>
@@ -556,8 +521,7 @@
                 <TabControl Margin="10,5,10,0"
                             Height="350"
                             Background="Transparent"
-                            BorderThickness="0,0,0,0"
-                            SelectionChanged="TogglePercy">
+                            BorderThickness="0,0,0,0">
                     <TabControl.Resources>
                         <Style TargetType="{x:Type TabItem}">
                             <Setter Property="Template">

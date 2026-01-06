@@ -36,11 +36,11 @@ public static class Downloader {
                 string rez = await Task.Run(() => Install(tool.ToolName, tool.ToolCliSwitch, results));
 
                 results.Report($"{tool.ToolName} install {rez}\nElapsed Time: {watch.ElapsedMilliseconds}ms");
-            } else if (tool.ToolName == "Remote.msi" && !run) {
-                await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
-                Tools.MakeSupportShortcut();
+            //} else if (tool.ToolName == "Remote.msi" && !run) {
+            //    await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
+            //    Tools.MakeSupportShortcut();
 
-                results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");
+            //    results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");
             } else if (tool.ToolName == "ADWCleaner.exe") {
                 Directory.CreateDirectory(@"C:\AdwCleaner");
                 File.Copy(
@@ -59,8 +59,8 @@ public static class Downloader {
                 {
                     await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
 
-                    if (tool.ToolName == "Remote.msi")
-                        Tools.MakeSupportShortcut();
+                    //if (tool.ToolName == "Remote.msi")
+                    //    Tools.MakeSupportShortcut();
 
                     results.Report($"\n{tool.ToolName} opened in: {watch.ElapsedMilliseconds}ms");
                 }
