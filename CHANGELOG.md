@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - [optional] Create de-branded fork
 
 ## [Unreleased]
+## [3.0.3] - 01-11-2026
+### Added
+- Vertical scrollbar to "Misc. Installers" tab (only visible when needed)
+- Added "DisplayVersion" (22h2, 25h2, etc.) to OS info. Labeled "Version," while the info previously carrying this label has been changed to "Build"
+### Changed
+- Updated LICENSE with current year
 
 ## [Released]
 ## [3.0.2] - 12-30-2025

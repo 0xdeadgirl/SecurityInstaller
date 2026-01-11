@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Management;
+using Microsoft.Win32;
 
 public static class ComputerInfo {
     // Drive Partitions
@@ -11,12 +12,8 @@ public static class ComputerInfo {
             DriveInfo[] allDrives = System.IO.DriveInfo.GetDrives();
 
             foreach (DriveInfo drive in allDrives) {
-                switch (drive.DriveType) {
-                    case DriveType.Fixed:
-                        break;
-                    default:
-                        continue;
-                }
+                if(drive.DriveType != DriveType.Fixed)
+                    continue;
 
                 string freeSpace = Bytes.Format(drive.TotalFreeSpace);
                 string totalSpace = Bytes.Format(drive.TotalSize);
@@ -268,6 +265,19 @@ public static class ComputerInfo {
         return $"{cpuMan}\n{info}\n{GHz}";
     }
 
+    private static string GetWinDisplayVersion() {
+        using(RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")) {
+            try {
+                if(key != null)
+                    return key.GetValue("DisplayVersionz").ToString() ?? "N/A";
+            } catch(Exception e) {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        return "N/A";
+    }
+
     // ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem")
     private static string GetOSInformation() {
         string osInfo = string.Empty;
@@ -275,7 +285,7 @@ public static class ComputerInfo {
         try {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem")) {
                 foreach (ManagementObject wmi in searcher.Get()) {
-                    osInfo = $"{((string)wmi["Caption"]).Trim()}\nVersion: {(string)wmi["Version"]}\nArchitecture: {(string)wmi["OSArchitecture"]}";
+                    osInfo = $"{((string)wmi["Caption"]).Trim()}\nVersion: {(string)GetWinDisplayVersion()}\nBuild: {(string)wmi["Version"]}\nArchitecture: {(string)wmi["OSArchitecture"]}";
 
                     wmi.Dispose();
                 }
