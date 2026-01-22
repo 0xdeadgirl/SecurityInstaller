@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - [optional] Create de-branded fork
 
 ## [Unreleased]
+## [3.0.4] - 01-22-2026
+### Added
+- "New" Calling Card channel IDs to check for when making Calling Card shortcuts in NOC folder
+
 ## [3.0.3] - 01-11-2026
 ### Added
 - Vertical scrollbar to "Misc. Installers" tab (only visible when needed)
