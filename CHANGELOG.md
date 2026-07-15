@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - [optional] Create de-branded fork
 
 ## [Unreleased]
+## [3.1.b0] - 07-15-2026
+### Added
+- Functionality to invoke shortcuts from "Misc. Installers"
+
 ## [3.0.6] - 05-23-2026
 ### Added
 - Functionality to invoke PowerShell scripts from "Misc. Installers"

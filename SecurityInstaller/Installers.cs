@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -46,7 +47,7 @@ public static class Installers {
                 check_for_exec(file);
 
         void check_for_exec(string file) {
-            if(file.EndsWith(".exe") || file.EndsWith(".msi") || file.EndsWith(".bat") || file.EndsWith(".ps1")) {
+            if(file.EndsWith(".exe") || file.EndsWith(".msi") || file.EndsWith(".bat") || file.EndsWith(".ps1") || file.EndsWith(".lnk")) {
                 // This is the actual CheckBox XAML element
                 CheckBox installerCB = new CheckBox {
                     Content = Path.GetFileNameWithoutExtension(file),
@@ -72,6 +73,10 @@ public static class Installers {
     public static async Task<bool> RunInstaller(string path, IProgress<string> results) {
         try {
             ProcessStartInfo startInfo;
+            
+            // Check if file is a shortcut, and get the target if it is.
+            path = path.EndsWith(".lnk") ? UnwrapShortcut(path) : path;
+
             if(path.EndsWith(".ps1"))
                 startInfo = new ProcessStartInfo {
                     FileName = "powershell.exe",
@@ -93,5 +98,12 @@ public static class Installers {
             results.Report($"\nError Opening:{path}\n{ex.Message}");
             return false;
         }
+    }
+
+    private static string UnwrapShortcut(string path) {
+        WshShell shell = new WshShell();
+        IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(path);
+
+        return shortcut.TargetPath;
     }
 }
