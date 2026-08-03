@@ -70,7 +70,7 @@ public class Tools
         // we need to combine them with the ID in the middle.
         const string callingCardDirectory = @"C:\Program Files (x86)\LogMeIn Rescue Calling Card\";
         const string callingCardExecutable = @"\CallingCard.exe";
-        string[] channelIds = { "6gqmpb", "eost6i", "58pq3u","ypub4n","1jww6o","gekxnn" };
+        string[] channelIds = { "6gqmpb", "eost6i", "58pq3u", "ypub4n", "1jww6o", "gekxnn", "a2r0tk" };
 
         // No point in continuing if the NOC Folder isn't present.
         if (!Directory.Exists(dir))

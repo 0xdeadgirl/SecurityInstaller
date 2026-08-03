@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - [optional] Create de-branded fork
 
 ## [Unreleased]
+## [3.1.b1] - 08-03-2026
+### Added
+- Informational textbox in "Misc. Installers" when no installers are present
+- "Modify NOC Calling Card" checkbox under "Tool" - Downloads and runs Josh E.'s Calling Card modification PS script
+- Extra Calling Card channel ID
+
 ## [3.1.b0] - 07-15-2026
 ### Added
 - Functionality to invoke shortcuts from "Misc. Installers"

@@ -55,7 +55,7 @@ public static class Downloader {
         {
             try
             {
-                if (tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi" || tool.ToolName == "bloatkiller.bat")
+                if (tool.ToolName == "ADWCleaner.exe" || tool.ToolName == "Remote.msi" || tool.ToolName == "bloatkiller.bat" || tool.ToolName == "CC-edit.ps1")
                 {
                     await Task.Run(() => Process.Start(tool.ToolLocation, tool.ToolCliSwitch));
 

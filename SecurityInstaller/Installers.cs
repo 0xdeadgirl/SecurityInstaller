@@ -35,7 +35,9 @@ public static class Installers {
      * Searches for and in a local folder named 'installers' or 'ninite', and for every executable it finds,
      * it creates a checkbox in the 'Misc. Installers' tab.
      */
-    public static void FindMiscInstallers(StackPanel parent) {
+    public static bool FindMiscInstallers(StackPanel parent) {
+        bool is_empty = true;
+
         string installersFolder = Path.Combine(Directory.GetCurrentDirectory(), "installers");
         string niniteFolder = Path.Combine(Directory.GetCurrentDirectory(), "ninite");
 
@@ -45,6 +47,8 @@ public static class Installers {
         if(Directory.Exists(niniteFolder))
             foreach(string file in Directory.EnumerateFiles(niniteFolder))
                 check_for_exec(file);
+
+        return !is_empty;
 
         void check_for_exec(string file) {
             if(file.EndsWith(".exe") || file.EndsWith(".msi") || file.EndsWith(".bat") || file.EndsWith(".ps1") || file.EndsWith(".lnk")) {
@@ -57,8 +61,9 @@ public static class Installers {
                 };
 
                 // See 'installer' structure below, which tracks the CheckBox and executable path
-                installer installer = new installer(installerCB,file);
+                installer installer = new installer(installerCB, file);
 
+                is_empty = false;
                 parent.Children.Add(installerCB);
                 misc_installers.Add(installer);
 

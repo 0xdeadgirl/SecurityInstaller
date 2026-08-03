@@ -396,6 +396,11 @@
                                           Foreground="#E8E9ED"
                                           Margin="20,5,0,5"
                                           FontWeight="SemiBold" />
+                                <CheckBox x:Name="cc_edit"
+                                    Content="Modify NOC Calling Card"
+                                    Foreground="#E8E9ED"
+                                    Margin="20,5,0,5"
+                                    FontWeight="SemiBold" />
                                 <CheckBox x:Name="uBlock"
                                           Content="Install uBlock Origin Lite in Chrome/Edge"
                                           Foreground="#E8E9ED"
@@ -425,8 +430,18 @@
                             Margin="0,0,0,0">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <StackPanel Background="Transparent"
-                                            Margin="0,30,0,30"
+                                            Margin="0,0,0,0"
                                             x:Name="ninite">
+
+                                    <TextBlock x:Name="ninite_info"
+                                        Margin="0,20,0,0"
+                                        Text="Supported file types: exe, msi, bat, ps1, lnk&#x0a;&#x0a;Create a folder in the same directory as the Security Installer, and name it either 'ninite' or 'installers'. Then place your files in that folder and restart the Security Installer."
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        TextWrapping="Wrap"
+                                        Foreground="#E8E9ED"
+                                        FontWeight="SemiBold"
+                                        Width="250" />
 
                                     <StackPanel.Effect>
                                         <DropShadowEffect BlurRadius="15"
@@ -441,14 +456,6 @@
                                                 Value="Hand" />
                                         </Style>
                                     </StackPanel.Style>
-
-                                    <StackPanel.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="1.1"
-                                                ScaleY="1.1" />
-                                            <TranslateTransform Y="-15" />
-                                        </TransformGroup>
-                                    </StackPanel.RenderTransform>
 
                                 </StackPanel>
                             </ScrollViewer>

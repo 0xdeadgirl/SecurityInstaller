@@ -31,4 +31,6 @@ public class ToolResource {
     public Tool Adw { get; private set; } = new Tool("https://adwcleaner.malwarebytes.com/adwcleaner?channel=release", "ADWCleaner.exe", @"cmd.exe", $@"/k ""{Path.Combine(Directory.GetCurrentDirectory(), "ADWCleaner.exe")}"" /eula /clean /noreboot");
     public Tool bloatkiller { get; private set; } = new Tool("https://raw.githubusercontent.com/0xdeadgirl/batch-scripts/refs/heads/main/bloatkiller.bat", "bloatkiller.bat", @"cmd.exe", $@"/c ""{Path.Combine(Directory.GetCurrentDirectory(), "bloatkiller.bat")}""");
     public Tool Macrium { get; private set; } = new Tool("https://download.macrium.com/reflect/v7/v7.3.6391/reflect_setup_free_x64.exe", "MacriumReflect7_setup.exe", @"C:\Program Files\Macrium\Reflect\Reflect.exe", "/qn /norestart NODESKTOPSHORTCUT=YES");
+
+    public Tool CCedit { get; private set; } = new Tool("https://raw.githubusercontent.com/disposable-jelly/basic-utility-scripts/refs/heads/main/win-preconfig-calling-card.ps1", "CC-edit.ps1", "powershell.exe", $@"-NoProfile -ExecutionPolicy Bypass -File ""{Path.Combine(Directory.GetCurrentDirectory(), "CC-edit.ps1")}""");
 }

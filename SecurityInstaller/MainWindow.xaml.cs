@@ -38,7 +38,8 @@ namespace SecurityInstaller {
             timer.Start();
 
             DisplayHardwareInfo();
-            Installers.FindMiscInstallers(ninite);
+            if(Installers.FindMiscInstallers(ninite) == true)
+                ninite.Children.Remove(ninite_info);
         }
 
         private async void DisplayHardwareInfo() {
@@ -189,6 +190,30 @@ namespace SecurityInstaller {
                     progressBarProgress,
                     resultsProgress,
                     true, false, true
+                ));
+            }
+
+            if(cc_edit.IsChecked == true) {
+                Tool tool = resources.CCedit;
+
+                // Add to download List
+                report.DownloadPercentagesList.Add(tool);
+
+                // create progress reporter to update specific value
+                IProgress<int> progressVal = new Progress<int>(value => {
+                    // Update our tool refrence
+                    tool.PercentageComplete = value;
+
+                    // send updated report model to event
+                    progress.Report(report);
+                });
+
+                tasks.Add(Downloader.StartDownload(
+                    tool,
+                    progressVal,
+                    progressBarProgress,
+                    resultsProgress,
+                    true,false,true
                 ));
             }
 
